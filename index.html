@@ -1,0 +1,85 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script>
+function sortElements() {
+    var maps = $(".mapOption");
+    maps.sort(function(a, b) {
+        return parseInt(a.children[1].value) > parseInt(b.children[1].value) ? -1 : 1;
+    }).appendTo("#maps");
+}
+$( document ).ready(function() {
+    $(".mapOption").mouseup(sortElements);
+});
+</script>
+</head>
+<body>
+<div class="container">
+    <h1>Siege Map Rankings</h1>
+<form
+  action="https://formspree.io/f/xyybwjod"
+  method="POST"
+>
+  <div class="form-group">
+    <label for="inputName">Name</label>
+    <input class="form-control" name="name" required="true">
+    <small class="form-text text-muted">Do not put someone elses name or I will be mad.</small>
+  </div>
+  <div class="form-group" id="maps">
+    <div class="mapOption">
+        <label for="formBank">Bank</label>
+        <input type="range" class="form-control-range" id="formBank" name="bank">
+    </div>
+    <div class="mapOption">
+        <label for="formBorder">Border</label>
+        <input type="range" class="form-control-range" id="formBorder" name="border">
+    </div>
+    <div class="mapOption">
+        <label for="formChalet">Chalet</label>
+        <input type="range" class="form-control-range" id="formChalet" name="chalet">
+    </div>
+    <div class="mapOption">
+        <label for="formClubhouse">Clubhouse</label>
+        <input type="range" class="form-control-range" id="formClubhouse" name="clubhouse">
+    </div>
+    <div class="mapOption">
+        <label for="formCoastline">Coastline</label>
+        <input type="range" class="form-control-range" id="formCoastline" name="coastline">
+    </div>
+    <div class="mapOption">
+        <label for="formConsulate">Consulate</label>
+        <input type="range" class="form-control-range" id="formConsulate" name="consulate">
+    </div>
+    <div class="mapOption">
+        <label for="formKafe">Kafe</label>
+        <input type="range" class="form-control-range" id="formKafe" name="kafe">
+    </div>
+    <div class="mapOption">
+        <label for="formKanal">Kanal</label>
+        <input type="range" class="form-control-range" id="formKanal" name="kanal">
+    </div>
+    <div class="mapOption">
+        <label for="formOregon">Oregon</label>
+        <input type="range" class="form-control-range" id="formOregon" name="oregon">
+    </div>
+    <div class="mapOption">
+        <label for="formOutback">Outback</label>
+        <input type="range" class="form-control-range" id="formOutback" name="outback">
+    </div>
+    <div class="mapOption">
+        <label for="formVilla">Villa</label>
+        <input type="range" class="form-control-range" id="formVilla" name="villa">
+    </div>
+    <div class="mapOption">
+        <label for="formThemePark">Theme Park</label>
+        <input type="range" class="form-control-range" id="formThemePark" name="themepark">
+    </div>
+
+  </div>
+  <button type="submit">Send</button>
+</form>
+</div>
+</body>
+</html>
