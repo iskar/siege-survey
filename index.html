@@ -56,14 +56,16 @@ function sortElements(target) {
         }
     });
 }
+function reValue() {
+    var vals = $(".mapOption").map((x,y) => parseInt(y.children[2].value)).sort((a,b) => a < b ? 1 : -1);
+    $(".mapOption").each(function(i,m) {
+        m.children[2].value = vals[i];
+    });
+}
 $( document ).ready(function() {
     shuffle(maps);
     maps.forEach(x => addMapOption(tokenize(x), x))
-    Sortable.create(document.getElementById("maps"), {handle: ".handle", dragoverBubble: true, onMove: function(evt) {
-        var v =  evt.dragged.children[2].value;
-        evt.dragged.children[2].value = evt.related.children[2].value;
-        evt.related.children[2].value = v;
-    }});
+    Sortable.create(document.getElementById("maps"), {handle: ".handle", dragoverBubble: true, onChange: reValue});
 });
 </script>
 <style>
