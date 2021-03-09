@@ -32,26 +32,33 @@ var val = 100;
 function addMapOption(id, name) {
     var formName = "form"+id;
     var label = $("<label></label>").text(name).attr("for", id);
-    // var rVal = Math.floor(Math.random() * 200 )-100;
     var rVal = val;
     val -= 200/(maps.length-1);
     var input = $("<input type='range' min='-100' max='100' class='form-control-range' list='ticks' />").attr("id", id).attr("name", name).attr("value", rVal);
     var handle = $("<i class='bi bi-grip-vertical handle'></i>");
     var mapOption = $("<div class='mapOption'></div>").append(handle,label,input);
+    input.change(e => sortElements(e.target));
     $("#maps").append(mapOption);
 }
 
-function sortElements() {
+function sortElements(target) {
+    var v = parseInt(target.value);
+    var above = true;
     var maps = $(".mapOption");
-    maps.sort(function(a, b) {
-        return parseInt(a.children[2].value) > parseInt(b.children[2].value) ? -1 : 1;
-    }).appendTo("#maps");
+    maps.each(function(m,n) {
+        var mapV = parseInt(n.children[2].value);
+        if (n === target.parentElement) {
+            above = false;
+            return;
+        }
+        if ((above && (mapV < v)) || (!above && (mapV > v))) {
+            n.children[2].value = v;
+        }
+    });
 }
 $( document ).ready(function() {
     shuffle(maps);
     maps.forEach(x => addMapOption(tokenize(x), x))
-    // shuffle($(".mapOption")).appendTo("#maps");
-    $(".mapOption").mouseup(sortElements);
     Sortable.create(document.getElementById("maps"), {handle: ".handle", dragoverBubble: true, onMove: function(evt) {
         var v =  evt.dragged.children[2].value;
         evt.dragged.children[2].value = evt.related.children[2].value;
